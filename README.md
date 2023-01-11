@@ -1,4 +1,4 @@
-# Code-Crust: A personal blog about diverse tech topics
+# Code & Crust: A personal blog about diverse tech topics
 
 The aim of this project is simply to write articles about tech topics and sharing my knowledge with the world.
 
