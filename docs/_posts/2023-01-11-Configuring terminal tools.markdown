@@ -5,15 +5,18 @@ date:   2023-01-11 17:00:00 +0100
 author: Jonathan Persson
 categories: Productivity
 ---
+
+![My terminal configuration](docs/_site/assets/terminalConfig.png)
+
 Producing code in a reliable, fast pace and effective environment is more important than you think. When developing code, an enormous amount of time is spent *not* actually coding. One way to mitigate this is by accelerating your usage of the UNIX terminal.
 
-`Alacritty` is a GPU-accelerated terminal emulator written in rust which support a lot of modern features. Such as 24-bit colors , copy/paste, clicking on URLs, and custom key bindings.
+`Alacritty` is a GPU-accelerated terminal emulator written in rust which support a lot of modern features. Such as 24-bit colors, copy/paste, clicking on URLs, and custom key bindings.
 
 `Tmux`, on the other hand, is an open-source terminal manager able to tile multiple terminal sessions in a single window. By tiling terminals and even having multiple tmux sessions you'd be able to swiftly monitor multiple terminals set up for different reasons.
 
-`Oh My Zsh` is a framwork for managing your Z-shell. Oh My Zsh supports plugins and themes for developing software.
+`Oh My Zsh` is a framwork for managing your Z-shell. Oh My Zsh supports plugins and themes for customizing the aesthetic part of your terminal
 
-My alacritty config file, `alacritty.yml`, contains these following line. The most important thing here is to open tmux correctly upon launching alacritty. By actually starting my Z shell and attatching tmux I launch the last used tmux session.
+My alacritty config file, `alacritty.yml`, contains the following line. The most important thing here is to open tmux correctly upon launching alacritty. If done incorrectly, it's going to start up a new session every time you open alacritty, which we don't want. Lets start the Z-shell and attatching the last used tmux session.
 
 {% highlight yaml %}
 
@@ -53,7 +56,9 @@ key_bindings:
 
 <br>
 
-My tmux configuration is filled with key binding making the use of the terminal window manager a lot easier. By default the prefix key is `Ctrl + b` but my config allows me to simly hold `Left Alt`.
+My tmux configuration is filled with key bindings making the use of it a lot more efficient. By default the prefix key is `Ctrl + b` but my config allows me to simply hold `Left Alt`.
+
+For example, by holding down `Left Alt` and moving the arrow keys, I am able to switch between tmux panels.
 
 {% highlight shell %}
 # set scroll history to 8000 lines
@@ -110,7 +115,6 @@ set -g @plugin 'tmux-plugins/tpm'
 run '~/.tmux/plugins/tpm/tpm'
 
 {% endhighlight %}
-
 
 Finally, this is how my zshrc looks. I'm using PowerLevel10k as my theme, which I strongly recommend. 
 Install it by running following command.
