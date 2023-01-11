@@ -112,7 +112,7 @@ run '~/.tmux/plugins/tpm/tpm'
 {% endhighlight %}
 
 
-Finally, this is how my zshrc looks. Im using PowerLevel10k as my theme, which I strongly recommend. 
+Finally, this is how my zshrc looks. I'm using PowerLevel10k as my theme, which I strongly recommend. 
 Install it by running following command.
 
 {% highlight shell %}
