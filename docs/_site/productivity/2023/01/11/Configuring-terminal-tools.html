@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Configuring Alacritty + Tmux + Oh My Zsh | Code &amp; Crust</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="Configuring Alacritty + Tmux + Oh My Zsh" />
+<meta name="author" content="Jonathan Persson" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Producing code in a reliable, fast pace and effective environment is more important than you think. When developing code, an enormous amount of time is spent not actually coding. One way to mitigate this is by accelerating your usage of the UNIX terminal." />
+<meta property="og:description" content="Producing code in a reliable, fast pace and effective environment is more important than you think. When developing code, an enormous amount of time is spent not actually coding. One way to mitigate this is by accelerating your usage of the UNIX terminal." />
+<link rel="canonical" href="http://localhost:4000/Code-Crust/productivity/2023/01/11/Configuring-terminal-tools.html" />
+<meta property="og:url" content="http://localhost:4000/Code-Crust/productivity/2023/01/11/Configuring-terminal-tools.html" />
+<meta property="og:site_name" content="Code &amp; Crust" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2023-01-11T17:00:00+01:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Configuring Alacritty + Tmux + Oh My Zsh" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Jonathan Persson"},"dateModified":"2023-01-11T17:00:00+01:00","datePublished":"2023-01-11T17:00:00+01:00","description":"Producing code in a reliable, fast pace and effective environment is more important than you think. When developing code, an enormous amount of time is spent not actually coding. One way to mitigate this is by accelerating your usage of the UNIX terminal.","headline":"Configuring Alacritty + Tmux + Oh My Zsh","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/Code-Crust/productivity/2023/01/11/Configuring-terminal-tools.html"},"url":"http://localhost:4000/Code-Crust/productivity/2023/01/11/Configuring-terminal-tools.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/Code-Crust/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/Code-Crust/feed.xml" title="Code &amp; Crust" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/Code-Crust/">Code &amp; Crust</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/Code-Crust/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Configuring Alacritty + Tmux + Oh My Zsh</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2023-01-11T17:00:00+01:00" itemprop="datePublished">Jan 11, 2023
+      </time>• <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">Jonathan Persson</span></span></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>Producing code in a reliable, fast pace and effective environment is more important than you think. When developing code, an enormous amount of time is spent <em>not</em> actually coding. One way to mitigate this is by accelerating your usage of the UNIX terminal.</p>
+
+<p><code class="language-plaintext highlighter-rouge">Alacritty</code> is a GPU-accelerated terminal emulator written in rust which support a lot of modern features. Such as 24-bit colors , copy/paste, clicking on URLs, and custom key bindings.</p>
+
+<p><code class="language-plaintext highlighter-rouge">Tmux</code>, on the other hand, is an open-source terminal manager able to tile multiple terminal sessions in a single window. By tiling terminals and even having multiple tmux sessions you’d be able to swiftly monitor multiple terminals set up for different reasons.</p>
+
+<p><code class="language-plaintext highlighter-rouge">Oh My Zsh</code> is a framwork for managing your Z-shell. Oh My Zsh supports plugins and themes for developing software.</p>
+
+<p>My alacritty config file, <code class="language-plaintext highlighter-rouge">alacritty.yml</code>, contains these following line. The most important thing here is to open tmux correctly upon launching alacritty. By actually starting my Z shell and attatching tmux I launch the last used tmux session.</p>
+
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="na">env</span><span class="pi">:</span>
+  <span class="na">TERM</span><span class="pi">:</span> <span class="s">xterm-256color</span>
+
+<span class="na">window</span><span class="pi">:</span>
+  <span class="na">padding</span><span class="pi">:</span>
+    <span class="na">x</span><span class="pi">:</span> <span class="m">5</span>
+    <span class="na">y</span><span class="pi">:</span> <span class="m">1</span>
+
+  <span class="na">decorations</span><span class="pi">:</span> <span class="s">full</span>
+
+  <span class="na">title</span><span class="pi">:</span> <span class="s">Alacritty</span>
+
+  <span class="na">dynamic_title</span><span class="pi">:</span> <span class="no">true</span>
+
+<span class="na">scrolling</span><span class="pi">:</span>
+  <span class="na">history</span><span class="pi">:</span> <span class="m">10000</span>
+  <span class="na">size</span><span class="pi">:</span> <span class="m">12</span>
+
+<span class="na">shell</span><span class="pi">:</span>
+  <span class="na">program</span><span class="pi">:</span> <span class="s">/bin/zsh</span>
+  <span class="na">args</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">-l</span>
+    <span class="pi">-</span> <span class="s">-c</span>
+    <span class="pi">-</span> <span class="s2">"</span><span class="s">tmux</span><span class="nv"> </span><span class="s">attach</span><span class="nv"> </span><span class="s">||</span><span class="nv"> </span><span class="s">tmux"</span>
+
+<span class="na">mouse_bindings</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="pi">{</span> <span class="nv">mouse</span><span class="pi">:</span> <span class="nv">Middle</span><span class="pi">,</span> <span class="nv">action</span><span class="pi">:</span> <span class="nv">PasteSelection</span> <span class="pi">}</span>
+
+<span class="na">key_bindings</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="pi">{</span> <span class="nv">key</span><span class="pi">:</span> <span class="nv">V</span><span class="pi">,</span> <span class="nv">mods</span><span class="pi">:</span> <span class="nv">Alt</span><span class="pi">,</span> <span class="nv">action</span><span class="pi">:</span> <span class="nv">Paste</span> <span class="pi">}</span>
+  <span class="pi">-</span> <span class="pi">{</span> <span class="nv">key</span><span class="pi">:</span> <span class="nv">C</span><span class="pi">,</span> <span class="nv">mods</span><span class="pi">:</span> <span class="nv">Alt</span><span class="pi">,</span> <span class="nv">action</span><span class="pi">:</span> <span class="nv">Copy</span> <span class="pi">}</span></code></pre></figure>
+
+<p><br /></p>
+
+<p>My tmux configuration is filled with key binding making the use of the terminal window manager a lot easier. By default the prefix key is <code class="language-plaintext highlighter-rouge">Ctrl + b</code> but my config allows me to simly hold <code class="language-plaintext highlighter-rouge">Left Alt</code>.</p>
+
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><span class="c"># set scroll history to 8000 lines</span>
+set-option <span class="nt">-g</span> history-limit 8000
+
+<span class="c"># modern colors</span>
+<span class="nb">set</span> <span class="nt">-g</span> default-terminal <span class="s2">"screen-256color"</span>
+set-option <span class="nt">-ga</span> terminal-overrides <span class="s1">',xterm-256color:Tc'</span>
+
+<span class="c"># unbind the prefix</span>
+unbind C-a
+<span class="nb">set</span> <span class="nt">-g</span> prefix M-t
+<span class="nb">bind </span>M-t send-prefix
+
+<span class="c"># panes</span>
+<span class="nb">bind</span> <span class="nt">-n</span> M-h split-window <span class="nt">-h</span> <span class="nt">-c</span> <span class="s2">"#{pane_current_path}"</span>
+<span class="nb">bind</span> <span class="nt">-n</span> M-j split-window <span class="nt">-v</span> <span class="nt">-c</span> <span class="s2">"#{pane_current_path}"</span>
+<span class="nb">bind</span> <span class="nt">-n</span> M-d kill-pane
+<span class="nb">bind</span> <span class="nt">-n</span> M-n new-session
+<span class="nb">bind</span> <span class="nt">-n</span> M-s choose-session
+<span class="nb">bind</span> <span class="nt">-n</span> M-k copy-mode
+
+<span class="nb">bind</span> <span class="nt">-n</span> M-Up <span class="k">select</span><span class="nt">-pane</span> <span class="nt">-U</span> 
+<span class="nb">bind</span> <span class="nt">-n</span> M-Down <span class="k">select</span><span class="nt">-pane</span> <span class="nt">-D</span>
+<span class="nb">bind</span> <span class="nt">-n</span> M-Left <span class="k">select</span><span class="nt">-pane</span> <span class="nt">-L</span> 
+<span class="nb">bind</span> <span class="nt">-n</span> M-Right <span class="k">select</span><span class="nt">-pane</span> <span class="nt">-R</span> 
+
+<span class="nb">bind</span> <span class="nt">-n</span> M-H resize-pane <span class="nt">-L</span> 2
+<span class="nb">bind</span> <span class="nt">-n</span> M-L resize-pane <span class="nt">-R</span> 2
+<span class="nb">bind</span> <span class="nt">-n</span> M-K resize-pane <span class="nt">-U</span> 2
+<span class="nb">bind</span> <span class="nt">-n</span> M-J resize-pane <span class="nt">-D</span> 2
+
+<span class="nb">bind </span>r source-file ~/.tmux.conf
+
+<span class="c"># copy to X clipboard</span>
+<span class="nb">bind</span> <span class="nt">-T</span> copy-mode-vi v send <span class="nt">-X</span> begin-selection
+<span class="nb">bind</span> <span class="nt">-T</span> copy-mode-vi y send <span class="nt">-X</span> copy-selection-and-cancel
+set-window-option <span class="nt">-g</span> mode-keys vi
+
+<span class="nb">set</span> <span class="nt">-s</span> escape-time 0
+<span class="nb">set</span> <span class="nt">-g</span> mode-keys vi
+<span class="nb">set</span> <span class="nt">-g</span> mouse on
+<span class="nb">set</span> <span class="nt">-g</span> status on
+<span class="nb">set</span> <span class="nt">-g</span> focus-events on
+
+<span class="c"># Avoid date/time taking up space</span>
+<span class="nb">set</span> <span class="nt">-g</span> status-right <span class="s1">''</span>
+<span class="nb">set</span> <span class="nt">-g</span> status-right-length 0
+
+<span class="c"># Plugins</span>
+<span class="nb">set</span> <span class="nt">-g</span> @plugin <span class="s1">'tmux-plugins/tpm'</span>
+
+<span class="c"># Init Tmux Plugin Manager</span>
+run <span class="s1">'~/.tmux/plugins/tpm/tpm'</span></code></pre></figure>
+
+<p>Finally, this is how my zshrc looks. Im using PowerLevel10k as my theme, which I strongly recommend. 
+Install it by running following command.</p>
+
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell">git clone <span class="nt">--depth</span><span class="o">=</span>1 https://github.com/romkatv/powerlevel10k.git <span class="k">${</span><span class="nv">ZSH_CUSTOM</span><span class="k">:-</span><span class="p">~/.oh-my-zsh/custom</span><span class="k">}</span>/themes/powerlevel10k</code></pre></figure>
+
+<p>Add <code class="language-plaintext highlighter-rouge">ZSH_THEME="powerlevel10k/powerlevel10k"</code> to your zshrc.
+<br />
+<br /></p>
+
+<p>Install plugins by running</p>
+
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><span class="nb">cd</span> <span class="nv">$ZSH_CUSTOM</span>/plugins <span class="o">&amp;&amp;</span> git clone https://github.com/zsh-users/zsh-autosuggestions.git
+<span class="o">&amp;&amp;</span> git clone https://github.com/zsh-users/zsh-syntax-highlighting.git 
+<span class="o">&amp;&amp;</span> git clone https://github.com/zsh-users/zsh-completions.git
+<span class="o">&amp;&amp;</span> git clone https://github.com/djui/alias-tips.git</code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><span class="k">if</span> <span class="o">[[</span> <span class="nt">-r</span> <span class="s2">"</span><span class="k">${</span><span class="nv">XDG_CACHE_HOME</span><span class="k">:-</span><span class="nv">$HOME</span><span class="p">/.cache</span><span class="k">}</span><span class="s2">/p10k-instant-prompt-</span><span class="k">${</span><span class="p">(%)</span><span class="k">:-</span><span class="p">%n</span><span class="k">}</span><span class="s2">.zsh"</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then
+  </span><span class="nb">source</span> <span class="s2">"</span><span class="k">${</span><span class="nv">XDG_CACHE_HOME</span><span class="k">:-</span><span class="nv">$HOME</span><span class="p">/.cache</span><span class="k">}</span><span class="s2">/p10k-instant-prompt-</span><span class="k">${</span><span class="p">(%)</span><span class="k">:-</span><span class="p">%n</span><span class="k">}</span><span class="s2">.zsh"</span>
+<span class="k">fi</span>
+
+<span class="c"># Path to your oh-my-zsh installation.</span>
+<span class="nb">export </span><span class="nv">ZSH</span><span class="o">=</span><span class="s2">"</span><span class="nv">$HOME</span><span class="s2">/.oh-my-zsh"</span>
+
+<span class="nv">ZSH_THEME</span><span class="o">=</span><span class="s2">"powerlevel10k/powerlevel10k"</span>
+<span class="nv">plugins</span><span class="o">=(</span>git zsh-syntax-highlighting alias-tips <span class="nb">sudo </span>zsh-completions fzf<span class="o">)</span>
+
+<span class="nb">source</span> <span class="nv">$ZSH</span>/oh-my-zsh.sh
+
+<span class="o">[</span> <span class="nt">-f</span> ~/.fzf.zsh <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="nb">source</span> ~/.fzf.zsh
+
+<span class="c"># To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.</span>
+<span class="o">[[</span> <span class="o">!</span> <span class="nt">-f</span> ~/.p10k.zsh <span class="o">]]</span> <span class="o">||</span> <span class="nb">source</span> ~/.p10k.zsh</code></pre></figure>
+
+<p>If you wanna learn more about these amazing tools, here are links to their sites.
+<br />
+<a href="https://alacritty.org/">Alacritty site</a>
+<br />
+<a href="https://github.com/tmux/tmux">Tmux site</a>
+<br />
+<a href="https://ohmyz.sh/">ohmyzsh site</a>
+<br /></p>
+
+
+  </div><a class="u-url" href="/Code-Crust/productivity/2023/01/11/Configuring-terminal-tools.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/Code-Crust/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Code &amp; Crust</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Code &amp; Crust</li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/jonfpersson"><svg class="svg-icon"><use xlink:href="/Code-Crust/assets/minima-social-icons.svg#github"></use></svg> <span class="username">jonfpersson</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Exploring the intersection of code and crust in the world of software development and sourdough bread baking.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
