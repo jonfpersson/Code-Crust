@@ -109,10 +109,9 @@ set -g status-right ''
 set -g status-right-length 0
 
 # Plugins
-set -g @plugin 'tmux-plugins/tpm'
-
+# set -g @plugin 'tmux-plugins/tpm'
 # Init Tmux Plugin Manager
-run '~/.tmux/plugins/tpm/tpm'
+# run '~/.tmux/plugins/tpm/tpm'
 
 {% endhighlight %}
 
