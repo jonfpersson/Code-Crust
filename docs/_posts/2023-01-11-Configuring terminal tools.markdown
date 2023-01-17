@@ -6,7 +6,12 @@ author: Jonathan Persson
 categories: Productivity
 ---
 
-<img src="{{ site.baseurl }}/assets/terminalConfig.png">
+<a href="{{ site.baseurl }}/assets/terminalConfig.png">
+    <img 
+        src="{{ site.baseurl }}/assets/terminalConfig.png" 
+        alt="My terminal config"
+    >
+</a>
 
 Producing code in a reliable, fast pace and effective environment is more important than you think. When developing code, an enormous amount of time is spent *not* actually coding. One way to mitigate this is by accelerating your usage of the UNIX terminal.
 
