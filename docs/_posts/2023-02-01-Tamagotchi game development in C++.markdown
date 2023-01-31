@@ -16,7 +16,7 @@ To give myself a challenge, I decided to write the project in C++ as I had prior
 # Graphics
 
 Now, you can't have a game without some textures, so I had to make some myself!
-I started up my favorite open-source illustration program, gimp, and started to create some pixel art.
+I started up my favorite open-source illustration program, gimp, and began to create some pixel art.
 
 <img src="{{ site.baseurl }}/assets/2023-02-01/koromon_atlas.png">
 In this case, you'll see the picture consisting of two frames, firstly these are meant for creating a simple animation and secondly, having them combined into one image will reduce our IO-operations as they'll always be loaded into memory.
@@ -27,7 +27,7 @@ Then I just did the same thing for all of the Digimon evolutions I wanted, here 
 
 # Code structure
 
-Seeing as this was my first private C++ project, the structure underwent various iterations. There always seemed to be a better way of doing things. Firstly, I made two classes to represent the fundamental components of my game, A monster class and a UI controller.
+Seeing as this was my first private C++ project, the structure underwent various iterations. There always seemed to be a better way of doing things. Firstly, I made two classes to represent the fundamental components of my game, a monster class and a UI controller.
 
 {% highlight cpp %}
 
