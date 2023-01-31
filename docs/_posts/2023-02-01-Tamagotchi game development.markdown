@@ -18,12 +18,28 @@ To give myself a challenge, I decided to write the project in C++ as I had prior
 Now, you can't have a game without some textures, so I had to make some myself!
 I started up my favorite open-source illustration program, gimp, and began to create some pixel art.
 
-<img src="{{ site.baseurl }}/assets/2023-02-01/koromon_atlas.png">
+<a href="{{ site.baseurl }}/assets/2023-02-01/koromon_atlas.png">
+    <img 
+        src="{{ site.baseurl }}/assets/2023-02-01/koromon_atlas.png" 
+        alt="My terminal config"
+    >
+</a>
 In this case, you'll see the picture consisting of two frames, firstly these are meant for creating a simple animation and secondly, having them combined into one image will reduce our IO-operations as they'll always be loaded into memory.
 
 Then I just did the same thing for all of the Digimon evolutions I wanted, here are some examples.
-<img src="{{ site.baseurl }}/assets/2023-02-01/0_botamon_texture_atlas">
-<img src="{{ site.baseurl }}/assets/2023-02-01/2_agumon_texture_atlas_2">
+<a href="{{ site.baseurl }}/assets/2023-02-01/0_botamon_texture_atlas">
+    <img 
+        src="{{ site.baseurl }}/assets/2023-02-01/0_botamon_texture_atlas" 
+        alt="My terminal config"
+    >
+</a>
+
+<a href="{{ site.baseurl }}/assets/2023-02-01/2_agumon_texture_atlas_2">
+    <img 
+        src="{{ site.baseurl }}/assets/2023-02-01/2_agumon_texture_atlas_2" 
+        alt="My terminal config"
+    >
+</a>
 
 # Code structure
 
@@ -122,8 +138,13 @@ public:
 
 # Conclusion
 Overall this was a fun project, I learned a lot about C++ and using a media library. Even though `SFML` worked great for creating graphics I'd strongly recommend just using a game engine like Unity. An engine takes care of the less fun things leaving you the time and will to live to continue developing games.
+<a href="{{ site.baseurl }}/assets/2023-02-01/final.png">
+    <img 
+        src="{{ site.baseurl }}/assets/2023-02-01/final.png" 
+        alt="My terminal config"
+    >
+</a>
 
-<img src="{{ site.baseurl }}/assets/2023-02-01/final.png">
 
 Want to read more of my code? Check out the project on my [Github][github].
 
