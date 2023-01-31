@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Tamagotchi game development in C++"
-date:   2023-02-10 19:30:00 +0100
+date:   2023-02-01 19:30:00 +0100
 author: Jonathan Persson
 categories: Game Development
 ---
