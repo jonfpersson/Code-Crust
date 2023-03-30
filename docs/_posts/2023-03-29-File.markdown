@@ -28,9 +28,9 @@ Fun fact: I love frogs and therefore this picture has been my go-to test image d
 </a>
 <br>
 <br>
-<a href="{{ site.baseurl }}/assets/2023-03-29/0.jpg">
+<a href="{{ site.baseurl }}/assets/2023-03-29/0.png">
     <img 
-        src="{{ site.baseurl }}/assets/2023-03-29/0.jpg" 
+        src="{{ site.baseurl }}/assets/2023-03-29/0.png" 
         alt="Processed image"
     >
 </a>
