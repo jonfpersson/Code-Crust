@@ -18,6 +18,15 @@ Have you ever dreamed of having a futuristic smart mirror that can display infor
 
 For this project, I utilized the Raspberry Pi Pico microcontroller from the Raspberry Pi Foundation. This compact, energy-efficient computer is ideal for IoT-based projects due to its Wi-Fi connectivity and low power consumption. With a plethora of GPIO pins available for device and sensor control, I opted to pair the Raspberry Pi Pico with three 1.3" OLED displays. I integrated these displays into an IKEA RIBBA frame with a one-way mirror, which conceals the electronics while allowing the displays to shine through from behind. The brightness of the displays is regulated by a light sensor sitting behind the mirror as well. The resulting effect is a stunning, futuristic display that combines cutting-edge technology with sleek design.
 
+<br>
+<a href="{{ site.baseurl }}/assets/2023-05-11/circuitDesign.png">
+    <img 
+        src="{{ site.baseurl }}/assets/2023-05-11/circuitDesign.png" 
+        alt="Circuit design"
+    >
+</a>
+<br>
+
 # Software
 
 * ESPHome
@@ -28,7 +37,7 @@ ESPHome is a really cool piece of software from Nabu Casa. It is mainly an add-o
 
 ## How to configure I2C SH1106 display
 
-First we need to define which GPIO pins will act as the SDA and SCL for I2C.
+First we need to define which GPIO pins will act as the SDA and SCL for I2C communication.
 
 {% highlight YAML %}
 i2c:
@@ -53,6 +62,34 @@ display:
 {% endhighlight %}
 
 To be able to find the device we need to specify its I2C hardware address, in this case its `0x3C`. I then set the update interval to be an hour since the electricity price doesn't change more often than that either way. We can display information on the display by using the `printf` function. The functioning principle bears similarity to that of C/C++. Initially, the X position value is assigned a value of 1px, while the Y value is determined as 25 times a random number within the range of 0-1. Given that oled displays are prone to long-term burn-in, the specification of distinct Y positions is necessary to mitigate the occurrence of repetitive pixel illumination. A font is then specified followed by how the text is to be formatted. `%.2f ` simply prints a float value rounded to two decimals.
+
+On the two remaining displays, I displayed the current temperature in my room and the current time. Let's declare a time block in ESPHome.
+
+{% highlight YAML %}
+time:
+  - platform: homeassistant
+    id: homeassistant_time
+{% endhighlight %}
+
+Now we can use the time wherever we'd like. So like before, let's use a `printf` function.
+
+{% highlight YAML %}
+it.strftime(15, 25 * (rand()%10)/10, id(robotoBig), "%H:%M", id(homeassistant_time).now());
+{% endhighlight %}
+
+To display the room temperature, let's define the sensor and then use it.
+
+{% highlight YAML %}
+sensor:
+  - platform: homeassistant
+    entity_id: sensor.bedroom_sensor_temperature
+    id: room_temp
+    internal: true
+{% endhighlight %}
+
+{% highlight YAML %}
+it.printf(10, 25 * (rand()%10)/10, id(robotoBig), "%.1f C", id(room_temp).state);
+{% endhighlight %}
 
 ## How to configure I2C TSL2591
 
