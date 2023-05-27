@@ -120,7 +120,7 @@ Seeing as we've already specified how I2C data and clock are used, be don't need
 At first glance, it might seem like a lot is happening but in reality, it's pretty simple. There mainly two important settings to be considered, `address` and `gain`.
 I randomly tried setting the gain to `MEDIUM` and to my surprise it worked pretty well. 
 
-The gain on a TSL2591 is a feature that controls the sensitivity of the sensor to the incoming light. Specifically, it amplifies the signal that is detected by the photodiodes in the sensor. Therefore it's important to choose a fitting gain to not over- or under expose the sensor.
+The gain on a TSL2591 is a feature that controls the sensitivity of the sensor to the incoming light. Specifically, it amplifies the signal that is detected by the photodiodes in the sensor. Therefore it's important to choose a fitting gain to not over- or under-expose the sensor.
 
 The `address` field is set to `0x29` since that is the hardware address. It is important for it to not have the same address as any other device since all I2C devices communicate through a shared physical medium.
 
@@ -137,3 +137,16 @@ if(lux > 0.3 && lux < 2){
     id(my_display3).set_contrast(1.0);
 }
 {% endhighlight %}
+
+## Final result
+
+Here's a picture showcasing the final result, I am really happy with out it turned out.
+
+<br>
+<a href="{{ site.baseurl }}/assets/2023-05-11/showcase.png">
+    <img 
+        src="{{ site.baseurl }}/assets/2023-05-11/showcase.png" 
+        alt="Circuit design"
+    >
+</a>
+<br>
