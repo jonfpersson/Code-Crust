@@ -146,7 +146,7 @@ Here's a picture showcasing the final result, I am really happy with out it turn
 <a href="{{ site.baseurl }}/assets/2023-05-11/showcase.jpg">
     <img 
         src="{{ site.baseurl }}/assets/2023-05-11/showcase.jpg" 
-        alt="Circuit design"
+        alt="Showcase"
     >
 </a>
 <br>
